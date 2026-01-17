@@ -1,4 +1,3 @@
-import { getRegistryConfig, type RegistryConfig } from './config';
 import type {
 	CatalogResponse,
 	TagListResponse,
@@ -7,27 +6,31 @@ import type {
 	ImageConfig
 } from '$lib/types/registry';
 
+export interface RegistryCredentials {
+	url: string;
+	username: string;
+	password: string;
+}
+
 const MANIFEST_V2_CONTENT_TYPE = 'application/vnd.docker.distribution.manifest.v2+json';
 const MANIFEST_LIST_CONTENT_TYPE = 'application/vnd.docker.distribution.manifest.list.v2+json';
 const OCI_MANIFEST_CONTENT_TYPE = 'application/vnd.oci.image.manifest.v1+json';
 const OCI_INDEX_CONTENT_TYPE = 'application/vnd.oci.image.index.v1+json';
 
 export class RegistryClient {
-	private config: RegistryConfig;
+	private credentials: RegistryCredentials;
 
-	constructor(config?: RegistryConfig) {
-		this.config = config || getRegistryConfig();
+	constructor(credentials: RegistryCredentials) {
+		this.credentials = credentials;
 	}
 
 	private getAuthHeader(): string {
-		const credentials = Buffer.from(`${this.config.username}:${this.config.password}`).toString(
-			'base64'
-		);
+		const credentials = btoa(`${this.credentials.username}:${this.credentials.password}`);
 		return `Basic ${credentials}`;
 	}
 
 	private async fetch(path: string, options: RequestInit = {}): Promise<Response> {
-		const url = `${this.config.url}${path}`;
+		const url = `${this.credentials.url}${path}`;
 		const headers = new Headers(options.headers);
 		headers.set('Authorization', this.getAuthHeader());
 
@@ -165,13 +168,4 @@ export class RegistryClient {
 
 		return digest;
 	}
-}
-
-let clientInstance: RegistryClient | null = null;
-
-export function getRegistryClient(): RegistryClient {
-	if (!clientInstance) {
-		clientInstance = new RegistryClient();
-	}
-	return clientInstance;
 }

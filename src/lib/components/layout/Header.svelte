@@ -2,9 +2,10 @@
 	interface Props {
 		registryUrl?: string;
 		connected?: boolean;
+		onlogout?: () => void;
 	}
 
-	let { registryUrl = '', connected = false }: Props = $props();
+	let { registryUrl = '', connected = false, onlogout }: Props = $props();
 </script>
 
 <header class="bg-docker-navy shadow-lg">
@@ -32,6 +33,14 @@
 							title={connected ? 'Connected' : 'Disconnected'}
 						></span>
 					</div>
+					{#if onlogout}
+						<button
+							onclick={onlogout}
+							class="rounded px-3 py-1 text-sm text-docker-gray-400 hover:bg-docker-gray-700 hover:text-white"
+						>
+							Logout
+						</button>
+					{/if}
 				{/if}
 			</div>
 		</div>

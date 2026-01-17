@@ -1,11 +1,47 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import PageContainer from '$lib/components/layout/PageContainer.svelte';
 	import RepositoryList from '$lib/components/registry/RepositoryList.svelte';
 	import EmptyState from '$lib/components/ui/EmptyState.svelte';
-
-	let { data } = $props();
+	import { getClient } from '$lib/stores/credentials';
+	import type { Repository } from '$lib/types/registry';
 
 	let searchQuery = $state('');
+	let repositories = $state<Repository[]>([]);
+	let error = $state<string | null>(null);
+	let loading = $state(true);
+
+	onMount(() => {
+		loadRepositories();
+	});
+
+	async function loadRepositories() {
+		const client = getClient();
+		if (!client) {
+			error = 'Not connected to registry';
+			loading = false;
+			return;
+		}
+
+		try {
+			const repoNames = await client.listRepositories();
+
+			repositories = await Promise.all(
+				repoNames.map(async (name) => {
+					try {
+						const tags = await client.listTags(name);
+						return { name, tagCount: tags.length };
+					} catch {
+						return { name, tagCount: 0 };
+					}
+				})
+			);
+		} catch (e) {
+			error = e instanceof Error ? e.message : 'Failed to fetch repositories';
+		} finally {
+			loading = false;
+		}
+	}
 </script>
 
 <svelte:head>
@@ -37,9 +73,13 @@
 		</div>
 	{/snippet}
 
-	{#if data.error}
-		<EmptyState title="Connection Error" description={data.error} icon="error" />
+	{#if loading}
+		<div class="flex items-center justify-center py-12">
+			<div class="text-docker-gray-500">Loading repositories...</div>
+		</div>
+	{:else if error}
+		<EmptyState title="Connection Error" description={error} icon="error" />
 	{:else}
-		<RepositoryList repositories={data.repositories} {searchQuery} />
+		<RepositoryList {repositories} {searchQuery} />
 	{/if}
 </PageContainer>
