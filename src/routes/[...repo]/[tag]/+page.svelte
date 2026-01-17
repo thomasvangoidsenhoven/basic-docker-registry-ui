@@ -8,6 +8,8 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Badge from '$lib/components/ui/Badge.svelte';
 	import EmptyState from '$lib/components/ui/EmptyState.svelte';
+	import ArrowLeftIcon from '$lib/components/icons/ArrowLeftIcon.svelte';
+	import TrashIcon from '$lib/components/icons/TrashIcon.svelte';
 	import { getClient } from '$lib/stores/credentials';
 	import type { Manifest, ImageConfig } from '$lib/types/registry';
 
@@ -84,14 +86,7 @@
 			href="/{repository}"
 			class="flex items-center gap-2 text-sm text-docker-gray-600 hover:text-docker-gray-900"
 		>
-			<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M10 19l-7-7m0 0l7-7m-7 7h18"
-				/>
-			</svg>
+			<ArrowLeftIcon class="h-4 w-4" />
 			Back to {repository}
 		</a>
 	{/snippet}
@@ -113,14 +108,7 @@
 			</div>
 
 			<Button variant="danger" onclick={() => (deleteModalOpen = true)}>
-				<svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-					/>
-				</svg>
+				<TrashIcon class="mr-2 h-4 w-4" />
 				Delete Image
 			</Button>
 		</div>

@@ -5,6 +5,7 @@
 	import TagList from '$lib/components/registry/TagList.svelte';
 	import DeleteConfirmModal from '$lib/components/registry/DeleteConfirmModal.svelte';
 	import EmptyState from '$lib/components/ui/EmptyState.svelte';
+	import ArrowLeftIcon from '$lib/components/icons/ArrowLeftIcon.svelte';
 	import { getClient } from '$lib/stores/credentials';
 	import type { Tag } from '$lib/types/registry';
 
@@ -125,14 +126,7 @@
 			href="/"
 			class="flex items-center gap-2 text-sm text-docker-gray-600 hover:text-docker-gray-900"
 		>
-			<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M10 19l-7-7m0 0l7-7m-7 7h18"
-				/>
-			</svg>
+			<ArrowLeftIcon class="h-4 w-4" />
 			Back to repositories
 		</a>
 	{/snippet}
