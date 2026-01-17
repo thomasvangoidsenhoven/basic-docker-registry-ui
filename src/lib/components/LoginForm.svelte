@@ -58,7 +58,7 @@
 						bind:value={url}
 						required
 						placeholder="http://localhost:5050"
-						class="mt-1 block w-full rounded-lg border border-docker-gray-300 px-3 py-2 text-sm focus:border-docker-blue focus:ring-1 focus:ring-docker-blue focus:outline-none"
+						class="input-field"
 					/>
 				</div>
 
@@ -71,7 +71,7 @@
 						id="username"
 						bind:value={username}
 						required
-						class="mt-1 block w-full rounded-lg border border-docker-gray-300 px-3 py-2 text-sm focus:border-docker-blue focus:ring-1 focus:ring-docker-blue focus:outline-none"
+						class="input-field"
 					/>
 				</div>
 
@@ -84,7 +84,7 @@
 						id="password"
 						bind:value={password}
 						required
-						class="mt-1 block w-full rounded-lg border border-docker-gray-300 px-3 py-2 text-sm focus:border-docker-blue focus:ring-1 focus:ring-docker-blue focus:outline-none"
+						class="input-field"
 					/>
 				</div>
 
@@ -103,3 +103,12 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	@reference "$lib/styles.css";
+
+	.input-field {
+		@apply mt-1 block w-full rounded-lg border border-docker-gray-300 px-3 py-2 text-sm
+			focus:border-docker-blue focus:ring-1 focus:ring-docker-blue focus:outline-none;
+	}
+</style>

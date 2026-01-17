@@ -54,11 +54,9 @@
 			<div class="space-y-4">
 				{#if config.config.Entrypoint}
 					<div>
-						<dt class="text-sm font-medium text-docker-gray-500">Entrypoint</dt>
+						<dt class="dt-label">Entrypoint</dt>
 						<dd class="mt-1">
-							<code
-								class="rounded bg-docker-gray-100 px-2 py-1 font-mono text-sm text-docker-gray-700"
-							>
+							<code class="code-block">
 								{config.config.Entrypoint.join(' ')}
 							</code>
 						</dd>
@@ -67,11 +65,9 @@
 
 				{#if config.config.Cmd}
 					<div>
-						<dt class="text-sm font-medium text-docker-gray-500">Command</dt>
+						<dt class="dt-label">Command</dt>
 						<dd class="mt-1">
-							<code
-								class="rounded bg-docker-gray-100 px-2 py-1 font-mono text-sm text-docker-gray-700"
-							>
+							<code class="code-block">
 								{config.config.Cmd.join(' ')}
 							</code>
 						</dd>
@@ -80,11 +76,9 @@
 
 				{#if config.config.WorkingDir}
 					<div>
-						<dt class="text-sm font-medium text-docker-gray-500">Working Directory</dt>
+						<dt class="dt-label">Working Directory</dt>
 						<dd class="mt-1">
-							<code
-								class="rounded bg-docker-gray-100 px-2 py-1 font-mono text-sm text-docker-gray-700"
-							>
+							<code class="code-block">
 								{config.config.WorkingDir}
 							</code>
 						</dd>
@@ -93,7 +87,7 @@
 
 				{#if config.config.ExposedPorts}
 					<div>
-						<dt class="text-sm font-medium text-docker-gray-500">Exposed Ports</dt>
+						<dt class="dt-label">Exposed Ports</dt>
 						<dd class="mt-1 flex flex-wrap gap-2">
 							{#each Object.keys(config.config.ExposedPorts) as port (port)}
 								<Badge variant="info" size="sm">{port}</Badge>
@@ -104,10 +98,8 @@
 
 				{#if config.config.Env && config.config.Env.length > 0}
 					<div>
-						<dt class="text-sm font-medium text-docker-gray-500">Environment Variables</dt>
-						<dd
-							class="mt-2 max-h-48 overflow-y-auto rounded border border-docker-gray-200 bg-docker-gray-50 p-3"
-						>
+						<dt class="dt-label">Environment Variables</dt>
+						<dd class="scrollable-section">
 							{#each config.config.Env as env, i (i)}
 								<div class="font-mono text-xs text-docker-gray-600">{env}</div>
 							{/each}
@@ -117,10 +109,8 @@
 
 				{#if config.config.Labels && Object.keys(config.config.Labels).length > 0}
 					<div>
-						<dt class="text-sm font-medium text-docker-gray-500">Labels</dt>
-						<dd
-							class="mt-2 max-h-48 overflow-y-auto rounded border border-docker-gray-200 bg-docker-gray-50 p-3"
-						>
+						<dt class="dt-label">Labels</dt>
+						<dd class="scrollable-section">
 							{#each Object.entries(config.config.Labels) as [key, value] (key)}
 								<div class="font-mono text-xs">
 									<span class="text-docker-blue-dark">{key}</span>
@@ -143,3 +133,17 @@
 		<LayerList layers={manifest.layers} />
 	</div>
 </div>
+
+<style>
+	@reference "$lib/styles.css";
+
+	.dt-label {
+		@apply text-sm font-medium text-docker-gray-500;
+	}
+	.code-block {
+		@apply rounded bg-docker-gray-100 px-2 py-1 font-mono text-sm text-docker-gray-700;
+	}
+	.scrollable-section {
+		@apply mt-2 max-h-48 overflow-y-auto rounded border border-docker-gray-200 bg-docker-gray-50 p-3;
+	}
+</style>

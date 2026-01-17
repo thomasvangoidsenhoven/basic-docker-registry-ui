@@ -23,11 +23,11 @@
 		<table class="w-full">
 			<thead>
 				<tr class="border-b border-docker-gray-200 bg-docker-gray-50">
-					<th class="px-4 py-3 text-left text-sm font-medium text-docker-gray-600">Tag</th>
-					<th class="px-4 py-3 text-left text-sm font-medium text-docker-gray-600">Digest</th>
-					<th class="px-4 py-3 text-left text-sm font-medium text-docker-gray-600">Size</th>
-					<th class="px-4 py-3 text-left text-sm font-medium text-docker-gray-600">Created</th>
-					<th class="px-4 py-3 text-right text-sm font-medium text-docker-gray-600">Actions</th>
+					<th class="header-cell">Tag</th>
+					<th class="header-cell">Digest</th>
+					<th class="header-cell">Size</th>
+					<th class="header-cell">Created</th>
+					<th class="header-cell-right">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,3 +38,14 @@
 		</table>
 	</div>
 {/if}
+
+<style>
+	@reference "$lib/styles.css";
+
+	.header-cell {
+		@apply px-4 py-3 text-left text-sm font-medium text-docker-gray-600;
+	}
+	.header-cell-right {
+		@apply px-4 py-3 text-right text-sm font-medium text-docker-gray-600;
+	}
+</style>

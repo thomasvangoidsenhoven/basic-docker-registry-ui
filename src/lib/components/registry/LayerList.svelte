@@ -13,27 +13,27 @@
 	<table class="w-full">
 		<thead>
 			<tr class="border-b border-docker-gray-200 bg-docker-gray-50">
-				<th class="px-4 py-3 text-left text-sm font-medium text-docker-gray-600">#</th>
-				<th class="px-4 py-3 text-left text-sm font-medium text-docker-gray-600">Digest</th>
-				<th class="px-4 py-3 text-left text-sm font-medium text-docker-gray-600">Media Type</th>
-				<th class="px-4 py-3 text-right text-sm font-medium text-docker-gray-600">Size</th>
+				<th class="header-cell">#</th>
+				<th class="header-cell">Digest</th>
+				<th class="header-cell">Media Type</th>
+				<th class="header-cell-right">Size</th>
 			</tr>
 		</thead>
 		<tbody>
 			{#each layers as layer, index (layer.digest)}
 				<tr class="border-b border-docker-gray-100 hover:bg-docker-gray-50">
-					<td class="px-4 py-3 text-docker-gray-500">{index + 1}</td>
-					<td class="px-4 py-3">
+					<td class="cell text-docker-gray-500">{index + 1}</td>
+					<td class="cell">
 						<code
 							class="rounded bg-docker-gray-100 px-2 py-1 font-mono text-xs text-docker-gray-600"
 						>
 							{truncateDigest(layer.digest)}
 						</code>
 					</td>
-					<td class="px-4 py-3 text-sm text-docker-gray-600">
+					<td class="cell text-sm text-docker-gray-600">
 						{layer.mediaType.split('.').pop()}
 					</td>
-					<td class="px-4 py-3 text-right text-docker-gray-600">
+					<td class="cell text-right text-docker-gray-600">
 						{formatBytes(layer.size)}
 					</td>
 				</tr>
@@ -41,3 +41,17 @@
 		</tbody>
 	</table>
 </div>
+
+<style>
+	@reference "$lib/styles.css";
+
+	.header-cell {
+		@apply px-4 py-3 text-left text-sm font-medium text-docker-gray-600;
+	}
+	.header-cell-right {
+		@apply px-4 py-3 text-right text-sm font-medium text-docker-gray-600;
+	}
+	.cell {
+		@apply px-4 py-3;
+	}
+</style>

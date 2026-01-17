@@ -18,7 +18,7 @@
 </script>
 
 <tr class="border-b border-docker-gray-100 hover:bg-docker-gray-50">
-	<td class="px-4 py-3">
+	<td class="cell">
 		<a href="/{repository}/{tag.name}" class="flex items-center gap-2 hover:text-docker-blue">
 			<span class="font-medium text-docker-gray-900">{tag.name}</span>
 			{#if isLatest}
@@ -26,7 +26,7 @@
 			{/if}
 		</a>
 	</td>
-	<td class="px-4 py-3">
+	<td class="cell">
 		{#if tag.digest}
 			<code class="rounded bg-docker-gray-100 px-2 py-1 font-mono text-xs text-docker-gray-600">
 				{truncateDigest(tag.digest)}
@@ -35,21 +35,21 @@
 			<span class="text-docker-gray-400">-</span>
 		{/if}
 	</td>
-	<td class="px-4 py-3 text-docker-gray-600">
+	<td class="cell text-docker-gray-600">
 		{#if tag.size !== undefined}
 			{formatBytes(tag.size)}
 		{:else}
 			<span class="text-docker-gray-400">-</span>
 		{/if}
 	</td>
-	<td class="px-4 py-3 text-docker-gray-600">
+	<td class="cell text-docker-gray-600">
 		{#if tag.createdAt}
 			<span title={tag.createdAt}>{formatRelativeTime(tag.createdAt)}</span>
 		{:else}
 			<span class="text-docker-gray-400">-</span>
 		{/if}
 	</td>
-	<td class="px-4 py-3 text-right">
+	<td class="cell text-right">
 		<div class="flex items-center justify-end gap-2">
 			<a
 				href="/{repository}/{tag.name}"
@@ -66,3 +66,11 @@
 		</div>
 	</td>
 </tr>
+
+<style>
+	@reference "$lib/styles.css";
+
+	.cell {
+		@apply px-4 py-3;
+	}
+</style>

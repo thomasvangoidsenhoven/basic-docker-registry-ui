@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import './layout.css';
+	import '$lib/styles.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import Header from '$lib/components/layout/Header.svelte';
 	import LoginForm from '$lib/components/LoginForm.svelte';
