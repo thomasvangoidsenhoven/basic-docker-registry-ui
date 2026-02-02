@@ -1,10 +1,4 @@
-import type {
-	CatalogResponse,
-	TagListResponse,
-	Manifest,
-	ManifestLayer,
-	ImageConfig
-} from '$lib/types/registry';
+import type { CatalogResponse, ImageConfig, Manifest, ManifestLayer, TagListResponse } from '$lib/types/registry';
 
 export interface RegistryCredentials {
 	url: string;
@@ -51,12 +45,10 @@ export class RegistryClient {
 		const headers = new Headers(options.headers);
 		headers.set('Authorization', this.getAuthHeader());
 
-		const response = await fetch(url, {
+		return await fetch(url, {
 			...options,
 			headers
 		});
-
-		return response;
 	}
 
 	async checkConnection(): Promise<boolean> {
