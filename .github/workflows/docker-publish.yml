@@ -28,5 +28,7 @@ jobs:
           tags: |
             registry.thomasvangoidsenhoven.com/basic-docker-registry-ui:latest
             registry.thomasvangoidsenhoven.com/basic-docker-registry-ui:${{ github.sha }}
+          build-args: |
+            PUBLIC_DEFAULT_REGISTRY_URL=registry.thomasvangoidsenhoven.com
           cache-from: type=gha
           cache-to: type=gha,mode=max

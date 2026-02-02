@@ -3,6 +3,10 @@ FROM node:22-alpine AS build
 
 WORKDIR /app
 
+# Build argument for the default registry URL
+ARG PUBLIC_DEFAULT_REGISTRY_URL=http://localhost:5050
+ENV PUBLIC_DEFAULT_REGISTRY_URL=$PUBLIC_DEFAULT_REGISTRY_URL
+
 # Copy package files and install dependencies
 COPY package*.json ./
 RUN npm ci

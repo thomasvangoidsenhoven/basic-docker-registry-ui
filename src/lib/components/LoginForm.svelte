@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { PUBLIC_DEFAULT_REGISTRY_URL } from '$env/static/public';
 	import { credentials } from '$lib/stores/credentials';
 	import { RegistryClient } from '$lib/registry-client';
 	import DockerIcon from '$lib/components/icons/DockerIcon.svelte';
 
-	let url = $state('http://localhost:5050');
+	let url = $state(PUBLIC_DEFAULT_REGISTRY_URL || 'http://localhost:5050');
 	let username = $state('');
 	let password = $state('');
 	let error = $state('');

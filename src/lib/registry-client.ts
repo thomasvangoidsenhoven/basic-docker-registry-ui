@@ -17,11 +17,28 @@ const MANIFEST_LIST_CONTENT_TYPE = 'application/vnd.docker.distribution.manifest
 const OCI_MANIFEST_CONTENT_TYPE = 'application/vnd.oci.image.manifest.v1+json';
 const OCI_INDEX_CONTENT_TYPE = 'application/vnd.oci.image.index.v1+json';
 
+function normalizeUrl(url: string): string {
+	let normalized = url.trim();
+
+	// Add https:// if no protocol is specified
+	if (!normalized.startsWith('http://') && !normalized.startsWith('https://')) {
+		normalized = `https://${normalized}`;
+	}
+
+	// Remove trailing slashes for consistency
+	normalized = normalized.replace(/\/+$/, '');
+
+	return normalized;
+}
+
 export class RegistryClient {
 	private credentials: RegistryCredentials;
 
 	constructor(credentials: RegistryCredentials) {
-		this.credentials = credentials;
+		this.credentials = {
+			...credentials,
+			url: normalizeUrl(credentials.url)
+		};
 	}
 
 	private getAuthHeader(): string {
