@@ -1,0 +1,9 @@
+node_modules/
+build/
+.svelte-kit/
+*.md
+.git/
+.gitignore
+e2e/
+playwright-report/
+test-results/
