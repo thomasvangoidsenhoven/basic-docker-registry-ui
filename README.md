@@ -129,4 +129,4 @@ For image deletion to work, your registry must have `REGISTRY_STORAGE_DELETE_ENA
 
 ## License
 
-MIT
+BSD 2-Clause
