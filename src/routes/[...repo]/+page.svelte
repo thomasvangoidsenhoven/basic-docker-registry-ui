@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import PageContainer from '$lib/components/layout/PageContainer.svelte';
 	import TagList from '$lib/components/registry/TagList.svelte';
@@ -9,7 +9,7 @@
 	import { getClient } from '$lib/stores/credentials';
 	import type { Tag } from '$lib/types/registry';
 
-	let repository = $derived($page.params.repo);
+	let repository = $derived(page.params.repo);
 
 	let tags = $state<Tag[]>([]);
 	let error = $state<string | null>(null);

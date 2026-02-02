@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import PageContainer from '$lib/components/layout/PageContainer.svelte';
@@ -13,8 +13,8 @@
 	import { getClient } from '$lib/stores/credentials';
 	import type { Manifest, ImageConfig } from '$lib/types/registry';
 
-	let repository = $derived($page.params.repo);
-	let tag = $derived($page.params.tag);
+	let repository = $derived(page.params.repo);
+	let tag = $derived(page.params.tag);
 
 	let manifest = $state<Manifest | null>(null);
 	let config = $state<ImageConfig | null>(null);
