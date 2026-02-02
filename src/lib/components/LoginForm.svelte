@@ -66,26 +66,14 @@
 					<label for="username" class="block text-sm font-medium text-docker-gray-700">
 						Username
 					</label>
-					<input
-						type="text"
-						id="username"
-						bind:value={username}
-						required
-						class="input-field"
-					/>
+					<input type="text" id="username" bind:value={username} required class="input-field" />
 				</div>
 
 				<div>
 					<label for="password" class="block text-sm font-medium text-docker-gray-700">
 						Password
 					</label>
-					<input
-						type="password"
-						id="password"
-						bind:value={password}
-						required
-						class="input-field"
-					/>
+					<input type="password" id="password" bind:value={password} required class="input-field" />
 				</div>
 
 				<button
@@ -108,7 +96,6 @@
 	@reference "$lib/styles.css";
 
 	.input-field {
-		@apply mt-1 block w-full rounded-lg border border-docker-gray-300 px-3 py-2 text-sm
-			focus:border-docker-blue focus:ring-1 focus:ring-docker-blue focus:outline-none;
+		@apply mt-1 block w-full rounded-lg border border-docker-gray-300 px-3 py-2 text-sm focus:border-docker-blue focus:ring-1 focus:ring-docker-blue focus:outline-none;
 	}
 </style>
