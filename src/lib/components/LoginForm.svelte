@@ -53,7 +53,7 @@
 						Registry URL
 					</label>
 					<input
-						type="url"
+						type="text"
 						id="url"
 						bind:value={url}
 						required
